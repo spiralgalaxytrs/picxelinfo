@@ -1023,10 +1023,12 @@ https://hellodigi.ru/
     box-shadow: none;
   }
   .dark .mobile-panel.fixed {
-    background: #1d1d1d;
+    background: transparent;
   }
   .dark .mobile-panel.scrolled {
     border-color: #3C3C3C;
+    background: #1d1d1d;
+
   }
   .dark .mobile-panel.fixed-scroll-up {
     background: #1d1d1d;
