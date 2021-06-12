@@ -618,7 +618,7 @@ https://hellodigi.ru/
 .features-item-2:hover {
   cursor: pointer;
   color: white;
-  background-color: #F49F1C;
+  background-color: #aaf0d1;
   transition: all 0.3s ease-in-out;
 }
 .features-item-3:hover {
@@ -630,7 +630,7 @@ https://hellodigi.ru/
 .features-item-4:hover {
   cursor: pointer;
   color: white;
-  background-color: #F49F1C;
+  background-color: #aaf0d1;
   transition: all 0.3s ease-in-out;
 }
 .container.page--move .single-header.image-header {
