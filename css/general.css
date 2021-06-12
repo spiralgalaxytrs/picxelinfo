@@ -722,7 +722,7 @@ body.pop-up-open {
   z-index: 9999;
   position: absolute;
   top: 320px;
-  right: 10px;
+  right: -75px;
 }
 .wrap_float .next:hover {
   cursor: pointer;
