@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,158 +20,150 @@
     <link rel="icon" type="image/png" sizes="16x16" href="img/favicons/android-chrome-512x512.png">
     <link rel="icon" type="image/png" href="img/favicons/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" sizes="16x16" href="img/favicons/favicon.ico">
-    
-   
-    
 </head>
 
 <style>
-    .body {
+    body {
         font-family: 'Montserrat', sans-serif;
     }
 </style>
 <script>
-$(window).load(function() {
-	$(".loader").delay(2000).fadeOut("slow");
-  $("#overlayer").delay(2000).fadeOut("slow");
-})
+    window.addEventListener('load',function(){
+  initSlider(
+    'slider1', //id
+    ['flawless editing.'], 
+    100, //duration
+    1000 //delay
+    
+  );
+  initSlider(
+    'slider2', //id
+    ['life with our editing. '], 
+    100, //duration
+    1000 //delay
+    
+  );
+  initSlider(
+    'slider3', //id
+    ['colours shine though! '], 
+    100, //duration
+    1000 //delay
+    
+  );
+  initSlider(
+    'slider4', //id
+    ['Memories. Captured. Edited. '], 
+    100, //duration
+    1000 //delay
+    
+  );
+});
+
+//just copy and paste below
+var createText = function(text,id,duration){
+  document.getElementById(id).innerHTML = '';
+  for(let i = 0; i < text.length; i++){
+    setTimeout(()=>{
+      let newText = text.substr(0,(i+1));
+      document.getElementById(id).innerHTML = newText;
+    },duration*i);
+  }
 }
-    window.addEventListener('load', function () {
-        initSlider(
-            'slider1', //id
-            ['flawless editing.'],
-            100, //duration
-            1000 //delay
-
-        );
-        initSlider(
-            'slider2', //id
-            ['life with our editing. '],
-            100, //duration
-            1000 //delay
-
-        );
-        initSlider(
-            'slider3', //id
-            ['colours shine though! '],
-            100, //duration
-            1000 //delay
-
-        );
-        initSlider(
-            'slider4', //id
-            ['Memories. Captured. Edited. '],
-            100, //duration
-            1000 //delay
-
-        );
-    });
-
-    //just copy and paste below
-    var createText = function (text, id, duration) {
-        document.getElementById(id).innerHTML = '';
-        for (let i = 0; i < text.length; i++) {
-            setTimeout(() => {
-                let newText = text.substr(0, (i + 1));
-                document.getElementById(id).innerHTML = newText;
-            }, duration * i);
-        }
+var clearText = function(id,duration){
+  let text = document.getElementById(id).innerHTML;
+  for(let i = text.length; i > 0; i--){
+    setTimeout(()=>{
+      let newText = text.substr(0,text.length-i);
+      document.getElementById(id).innerHTML = newText;
+    },duration*i);
+  }
+}
+var initSlider = function(id,texts,duration,delay){
+  let durs = [];
+  for(let i = 0; i < texts.length-1; i++){
+    let beforeDur;
+    if(i==0){
+      beforeDur = 0;
     }
-
-    var clearText = function (id, duration) {
-        let text = document.getElementById(id).innerHTML;
-        for (let i = text.length; i > 0; i--) {
-            setTimeout(() => {
-                let newText = text.substr(0, text.length - i);
-                document.getElementById(id).innerHTML = newText;
-            }, duration * i);
-        }
+    else{
+      beforeDur=durs[i-1];
     }
-    var initSlider = function (id, texts, duration, delay) {
-        let durs = [];
-        for (let i = 0; i < texts.length - 1; i++) {
-            let beforeDur;
-            if (i == 0) {
-                beforeDur = 0;
-            }
-            else {
-                beforeDur = durs[i - 1];
-            }
-            durs.push((texts[i].length * duration * 2) + (2 * delay) + beforeDur);
-        }
-
-        let allTime = 0;
-        for (let i = 0; i < texts.length; i++) {
-            allTime += (texts[i].length * duration * 2) + (2 * delay);
-        }
-        let mainSlider = function () {
-            for (let i = 0; i < texts.length; i++) {
-                setTimeout(() => {
-                    createText(texts[i], id, duration);
-                    setTimeout(() => {
-                        clearText(id, duration);
-                    }, texts[i].length * duration + delay);
-                }, i === 0 ? 0 : durs[i - 1]);
-            }
-        }
-        mainSlider();
-        setInterval(() => {
-            mainSlider();
-        }, allTime);
+    durs.push((texts[i].length*duration*2) + (2*delay) + beforeDur);
+  }
+  
+  let allTime = 0;
+  for (let i = 0; i < texts.length; i++){
+    allTime += (texts[i].length*duration*2) + (2*delay);
+  }
+  let mainSlider = function(){
+    for(let i = 0; i < texts.length; i++){
+      setTimeout(()=>{
+        createText(texts[i],id,duration);
+        setTimeout(()=>{
+          clearText(id,duration);
+        },texts[i].length*duration + delay);
+      },i === 0 ? 0 : durs[i-1]);
     }
+  }
+  mainSlider();
+  setInterval(()=>{
+    mainSlider();
+  },allTime);  
+}
 
 </script>
 <style>
-#preloader {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #fff;
-  /* change if the mask should have another color then white */
-  z-index: 99;
-  /* makes sure it stays on top */
+   .center{
+  height:20vh;
+  display:flex;
+  justify-content:left;
+  text-align:left;
+  align-items:flex-start;
+  font-family:fangsong;
+  font-size:75px;
+  color:white;
 }
+@media screen and (max-width: 450px) {
+    .center{
+  height:40vh;
+  display:flex;
+  justify-content:left;
+  text-align:left;
+  align-items:flex-start;
+  font-family:fangsong;
+  font-size:45px;
+  color:white;
+    }
 
-#status {
-  width: 200px;
-  height: 200px;
-  position: absolute;
-  left: 50%;
-  /* centers the loading animation horizontally one the screen */
-  top: 50%;
-  /* centers the loading animation vertically one the screen */
-  background-image: url(https://d13yacurqjgara.cloudfront.net/users/12755/screenshots/1037374/hex-loader2.gif);
-  /* path to your loading animation */
-  background-repeat: no-repeat;
-  background-position: center;
-  margin: -100px 0 0 -100px;
-  /* is width and height divided by two */
-}</style>
+
+    
+}
+</style>
 
 
 
 
 
 <body class="transition-none">
+
+    <div class="preloader-jackhammer">
+        <ul class="cssload-flex-container">
+          <li>
+            <span class="cssload-loading"></span>
+          </li>
+        </ul>
+      </div>
+
     
-<div id="overlayer"></div>
-<span class="loader">
-  <span class="loader-inner"></span>
-</span>
-	
-	
-	
-    <div style="margin-top: -100px;" class="container page">
+    <div class="container page">
         <div class="container-wrap">
-            <div class="mobile-panel scrolled">
+            <div class="mobile-panel">
                 <div class="wrap">
                     <div class="wrap_float ">
 
 
 
-                        <div class="mode-check mobile-disable">
+                        <div class="mode-check mobile-disable ">
                             <input type="checkbox" id="mode-checkbox" class="mode-checkbox-input">
                             <label for="mode-checkbox" class="mode-checkbox-label" data-dark-title="Dark Mode"
                                 data-light-title="Light Mode"></label>
@@ -186,9 +179,8 @@ $(window).load(function() {
                     </div>
                 </div>
             </div>
-
-            <div class="top-panel top-panel-fixed  top-h d-center-col fixed" id="js-panel">
-                <div class="wrap wrap-wide" style="background-image: url(temp/navbg.jpg);">
+            <div class="top-panel top-h top-panel-wide d-center-col fixed" id="js-panel">
+                <div class="wrap wrap-wide">
 
                     <div class="wrap_float overlay-top d-center-col">
 
@@ -205,11 +197,11 @@ $(window).load(function() {
                             <div class="menu d-center-col" id="js-menu" style="text-align: center; padding: 50px;">
                                 <ul>
                                     <li>
-                                        <a href="index.html" style="font-size: 45px; font-weight: 700;">Home</a><br><br>
-                                        <a href="about.html" style="font-size: 45px; font-weight: 700;">About</a><br><br>
-                                        <a href="service.html" style="font-size: 45px; font-weight: 700;">Service</a><br><br>
-                                        <a href="portfolio.html" style="font-size: 45px; font-weight: 700;">Portfolio</a><br><br>
-                                        <a href="contact.html" style="font-size: 45px; font-weight: 700;">Contact</a>
+                                        <a href="index.html">Home</a><br>
+                                        <a href="about.html">About</a><br>
+                                        <a href="service.html">Service</a><br>
+                                        <a href="portfolio.html">Portfolio</a><br>
+                                        <a href="contact.html">Contact</a>
                                     </li>
 
                                 </ul>
@@ -239,19 +231,17 @@ $(window).load(function() {
                         <div class="slide__img">
                             <img src="temp/DSC02808 (1).jpg" alt="">
                         </div>
-                        <div class="wrap">
+                        <div class="wrap ">
                             <div class="wrap_float js-fix-height">
                                 <div class="slide-content ">
 
-
                                     <div class="center">
-                                        <h1>Timeless look,
-                                            <div id='slider1'>flawless editing.</div>
-                                        </h1>
-                                    </div><br><br>
-                                    <p class="slide-description">
-                                        We help you get back to your past, present or even space with our editing
-                                        experts. </p>
+                                       <h1>Timeless look,  
+                                        <div id='slider1'>flawless editing.</div></h1>
+                                      </div><br><br>
+                                      <p class="slide-description">
+                                            We help you get back to your past, present or even space with our editing
+                                            experts. </p> 
 
 
                                 </div>
@@ -269,13 +259,11 @@ $(window).load(function() {
                                 <div class="slide-content">
 
                                     <div class="center">
-                                        <h1>Photo memories for
-                                            <div id='slider2'>flawless editing.</div>
-                                        </h1>
-                                    </div><br><br>
+                                        <h1>Photo memories for   
+                                         <div id='slider2'>flawless editing.</div></h1>
+                                       </div><br><br>
                                     <p class="slide-description">
-                                        Your ideas can come true with our editing experts, where in we thrive to give
-                                        the best results. </p>
+                                        Your ideas can come true with our editing experts, where in we thrive to give the best results. </p>
 
                                 </div>
                             </div>
@@ -291,10 +279,9 @@ $(window).load(function() {
                             <div class="wrap_float js-fix-height">
                                 <div class="slide-content">
                                     <div class="center">
-                                        <h1>Let your true
-                                            <div id='slider3'>flawless editing.</div>
-                                        </h1>
-                                    </div><br><br>
+                                        <h1>Let your true  
+                                         <div id='slider3'>flawless editing.</div></h1>
+                                       </div><br><br>
                                     <p class="slide-description ">
                                         We play with colour to bring out your life’s colourfulness. We ensure quick
                                         turnaround of projects. </p>
@@ -307,16 +294,15 @@ $(window).load(function() {
                 <div class="slide">
                     <div class="slide__wrap">
                         <div class="slide__img">
-                            <img src="temp/p4.jpg">
+                            <img src="temp/DSC09645 (1).jpg">
                         </div>
                         <div class="wrap">
                             <div class="wrap_float js-fix-height">
                                 <div class="slide-content">
                                     <div class="center">
-                                        <h1>Real life.
-                                            <div id='slider4'>flawless editing.</div>
-                                        </h1>
-                                    </div><br><br>
+                                        <h1>Real life.   
+                                         <div id='slider4'>flawless editing.</div></h1>
+                                       </div><br><br>
                                     <p class="slide-description">
                                         We create a wow- worthy photo with our flawless editing skills. </p>
 
@@ -351,34 +337,14 @@ $(window).load(function() {
 
             <script src="https://use.fontawesome.com/6ae9c28fc7.js"></script>
 
-            <!--a href="tel:+919788006248" class="float1" target="_blank">
+            <a href="tel:+919788006248" class="float1" target="_blank">
                 <i class="fa fa-phone my-float1"></i>
             </a>
 
             <a href="https://api.whatsapp.com/send?phone=+919788006248&text=Hello picxel Info Tech" class="float"
                 target="_blank">
                 <i class="fa fa-whatsapp my-float"></i>
-            </a-->
-            <div class="mainopShadow"></div>
-            <div class="fab">
-                <div class="mainop">
-                    <i id="addIcon" class="fa fa-add material-icons">+</i>
-                </div>
-                <a href="mailto:picxelinfotech@gmail.com">
-                    <div id="sheets" class="minifab op3">
-                        <i class="fa fa-envelope my-float"></i>
-                    </div>
-                </a>
-                <a href="https://api.whatsapp.com/send?phone=+919788006248&text=Hello picxel Info Tech">
-                    <div id="sheets" class="minifab op2">
-                        <i class="fa fa-whatsapp my-float"></i>
-                    </div>
-                </a>
-                <a href="tel:+919788006248">
-                    <div id="docs" class="minifab op1">
-                        <i class="fa fa-phone my-float1"></i>
-                    </div>
-            </div></a>
+            </a>
 
             <div class="single-content wp-content">
                 <div class="wrap ">
@@ -402,14 +368,11 @@ $(window).load(function() {
             <section class="packages-section section center-title-section js-slider-block">
                 <div class="wrap">
                     <div class="wrap_float">
-                        <div class="section-head">
 
-                            <h2 class="title " style="text-align: center;">A choice of our creation!</h2>
-                            <div class="arrows">
-                                <div class="arrow prev"></div>
-                                <div class="arrow next"></div>
-                            </div>
-                        </div>
+                        <h2 class="title">A choice of your creation!</h2>
+                        <div class="subtitle">Be it sky replacement, Vintage Film, HRD Blending or any of your
+                            convenience, Pixcel infotech has got you covered. ​</div>
+
                         <div class="section-content">
 
                             <div class="packages-slider">
@@ -426,7 +389,7 @@ $(window).load(function() {
                                 </a>
                                 <a href="service.html" class="packages-item">
                                     <div class="shadow js-shadow"></div>
-                                    <div class="bg-img " style="background-image: url(temp/hdrafter.jpg)">
+                                    <div class="bg-img" style="background-image: url(temp/hdrafter.jpg)">
                                     </div>
                                     <div class="packages-item-head">
 
@@ -471,49 +434,57 @@ $(window).load(function() {
             <section class="packages-section section center-title-section js-slider-block">
                 <div class="wrap  ">
                     <div class="wrap_float">
-                        <h2 class="title">A prespective of moments!</h2>
-
+                        <h2 class="title">A new prespective of moments!</h2>
+                        <div class="subtitle">Picxel infotech is a click away editing company. We have made it easy for
+                            you. Upload the photo
+                            you want to edit. We will edit your photo at your choice. Download the edited photo.
+                            Providing you the quality and
+                            best finished results. ​</div>
 
                         <div class="features">
-                            <div id="features-item-1" class="features-item features-item-1">
+                            <div class="features-item features-item-1">
                                 <div class="features-item-icon">
                                     <img src="temp/upload-2.png" alt="">
                                 </div>
-                                <div id="features-item-1-title" class="features-item-title">
+                                <div class="features-item-title">
                                     Upload
                                 </div>
-                                <p id="features-item-1-des" style="text-align:center; font-size: 15px; padding: 5px;">
-                                     </p>
+                                <p style="text-align:center; font-size: 15px; padding: 5px;">
+                                    Choose the picture you want to edit. Click the upload button to upload the photo
+                                    file. </p>
                             </div>
-                            <div id="features-item-2" class="features-item features-item-2">
+                            <div class="features-item features-item-2">
                                 <div class="features-item-icon">
                                     <img src="temp/edit.png" alt="">
                                 </div>
-                                <div id="features-item-2-title" class="features-item-title">
+                                <div class="features-item-title">
                                     Edit
                                 </div>
-                                <p id="features-item-2-des" style="text-align:center; font-size: 15px; padding: 5px;">
-                                    </p>
+                                <p style="text-align:center; font-size: 15px; padding: 5px;">
+                                    Our team of editing experts will edit your photo as per your request and upload it
+                                    to the website. </p>
                             </div>
-                            <div id="features-item-3" class="features-item features-item-3">
+                            <div class="features-item features-item-3">
                                 <div class="features-item-icon">
                                     <img src="temp/quality.png" alt="">
                                 </div>
-                                <div id="features-item-3-title" class="features-item-title">
+                                <div class="features-item-title">
                                     Quality
                                 </div>
-                                <p id="features-item-3-des" style="text-align:center; font-size: 15px; padding: 5px;">
-                                     </p>
+                                <p style="text-align:center; font-size: 15px; padding: 5px;">
+                                    We have a dedicated quality control team to ensure editing is performed to the
+                                    highest of standards. </p>
                             </div>
-                            <div id="features-item-4" class="features-item features-item-4">
+                            <div class="features-item features-item-4">
                                 <div class="features-item-icon">
                                     <img src="temp/ready.png" alt="">
                                 </div>
-                                <div id="features-item-4-title" class="features-item-title">
+                                <div class="features-item-title">
                                     Download
                                 </div>
-                                <p id="features-item-4-des" style="text-align:center; font-size: 15px; padding: 5px;">
-                                     </p>
+                                <p style="text-align:center; font-size: 15px; padding: 5px;">
+                                    Once we upload your photo to the server you can click the download button and safe
+                                    you picture. </p>
                             </div>
                         </div>
                     </div>
@@ -525,6 +496,7 @@ $(window).load(function() {
                     <div class="wrap wrap-center">
                         <div class="wrap_float">
                             <h2 class="title">Our Portfolio</h2>
+                            <div class="subtitle">Today’s moments are tomorrow’s treasures! </div>
                             <div class="section-content">
                                 <div class="block-columns gallery-columns columns-3 wide-columns lightgallery-on">
                                     <div class="block-column">
@@ -584,7 +556,7 @@ $(window).load(function() {
                     </div>
                 </div>
             </section>
-            <section class="banner-section" style="background-image: url(temp/srafter.jpg);">
+            <section class="banner-section" style="background-image: url(temp/parallx.jpg);">
                 <div class="wrap wrap-center">
                     <div class="wrap_float">
                         <div class="section-content">
@@ -951,7 +923,13 @@ $(window).load(function() {
             Error occurred
         </span>
     </div>
-
+    <script>
+    window.onload = function(){
+        //hide the preloader
+        document.querySelector(".preloader-jackhammer").style.display = "none";
+    }
+   
+    </script>
     <script src="js/jquery.min.js"></script>
     <script src="js/checkmode.js"></script>
     <script src="js/slick.min.js"></script>
@@ -962,7 +940,6 @@ $(window).load(function() {
     <script src="js/jquery.placeholder.label.js"></script>
     <script src="js/jquery-ui.min.js"></script>
     <script src="js/scripts.js"></script>
-    <script src="js/hover.js"></script>
 </body>
 
 </html>
