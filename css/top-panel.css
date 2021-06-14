@@ -1,11 +1,4 @@
-/*
-Developed by helloDigi
-https://hellodigi.ru/
-*/
-/*
-Developed by helloDigi
-https://hellodigi.ru/
-*/
+
 .Regular {
   font-family: 'Montserrat', sans-serif;
   font-weight: 400;
@@ -676,8 +669,8 @@ https://hellodigi.ru/
     position: fixed;
     top: 0;
     bottom: 0;
-    left: -100%;
-    width: 100%;
+    left: -300px;
+    width: 300px;
     background: #fff;
     transition: all 0.2s linear;
     overflow: auto;
